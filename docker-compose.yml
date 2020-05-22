@@ -1,0 +1,8 @@
+version: "2"
+
+services:
+    strato-ddns:
+        container_name: strato-ddns
+        build: 
+            context: .
+        restart: always
