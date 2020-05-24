@@ -75,7 +75,7 @@ def loop_ddns_update(host, key):
                 last_ip = current_ip
         else:
             log.debug("skipped update, ip address unchanged")
-        sleep(5)
+        sleep(30)
 
 
 if __name__ == "__main__":
