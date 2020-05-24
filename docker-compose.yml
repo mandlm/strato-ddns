@@ -5,4 +5,8 @@ services:
         container_name: strato-ddns
         build: 
             context: .
+        network_mode: host
         restart: always
+        environment:
+          - DDNS_HOST=my.host.name
+          - DDNS_KEY=secret

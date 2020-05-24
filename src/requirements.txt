@@ -1,2 +1,4 @@
 Click==7.0
 requests==2.23.0
+netifaces==0.10.9
+ipaddress==1.0.23
