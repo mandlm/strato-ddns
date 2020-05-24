@@ -9,7 +9,7 @@ from netifaces import interfaces, ifaddresses, AF_INET6
 from ipaddress import ip_address
 from time import sleep
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 log = logging.getLogger("ddns updater")
 
 
@@ -43,7 +43,7 @@ def ddns_update(host, key, ip):
             raise RequestException("update failed")
 
     except RequestException as error:
-        log.debug(response.text.strip())
+        log.error(response.text.strip())
         log.error(error)
         return False
 
