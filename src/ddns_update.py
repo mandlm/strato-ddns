@@ -9,7 +9,7 @@ from netifaces import interfaces, ifaddresses, AF_INET6
 from ipaddress import ip_address
 from time import sleep
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format="%(asctime)-15s - %(name)s %(levelname)-8s: %(message)s")
 log = logging.getLogger("ddns updater")
 
 
@@ -33,10 +33,15 @@ def response_successful(response_text):
 
 
 def ddns_update(host, key, ip):
-    url = f"https://dyndns.strato.com/nic/update?hostname={host}&myip={ip}"
+    url = f"https://dyndns.strato_.com/nic/update?hostname={host}&myip={ip}"
 
     try:
         response = requests.get(url, auth=(host, key), timeout=3)
+    except RequestException as error:
+        log.error(error)
+        return False
+
+    try:
         response.raise_for_status()
 
         if not response_successful(response.text):
