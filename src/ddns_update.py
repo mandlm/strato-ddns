@@ -33,10 +33,15 @@ def response_successful(response_text):
 
 
 def ddns_update(host, key, ip):
-    url = f"https://dyndns.strato.com/nic/update?hostname={host}&myip={ip}"
+    url = f"https://dyndns.strato_.com/nic/update?hostname={host}&myip={ip}"
 
     try:
         response = requests.get(url, auth=(host, key), timeout=3)
+    except RequestException as error:
+        log.error(error)
+        return False
+
+    try:
         response.raise_for_status()
 
         if not response_successful(response.text):
