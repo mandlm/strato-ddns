@@ -33,7 +33,7 @@ def response_successful(response_text):
 
 
 def ddns_update(host, key, ip):
-    url = f"https://dyndns.strato_.com/nic/update?hostname={host}&myip={ip}"
+    url = f"https://dyndns.strato.com/nic/update?hostname={host}&myip={ip}"
 
     try:
         response = requests.get(url, auth=(host, key), timeout=3)
