@@ -9,7 +9,7 @@ from netifaces import interfaces, ifaddresses, AF_INET6
 from ipaddress import ip_address
 from time import sleep
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format="%(asctime)-15s - %(name)s %(levelname)-8s: %(message)s")
 log = logging.getLogger("ddns updater")
 
 
