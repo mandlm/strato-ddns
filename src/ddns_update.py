@@ -46,7 +46,7 @@ def ddns_update(host, key, ip):
         response.raise_for_status()
 
         if not response_successful(response.text):
-            raise RequestException("update failed")
+            raise RequestException(f"update to {ip} failed")
 
     except RequestException as error:
         log.error(response.text.strip())
@@ -54,7 +54,7 @@ def ddns_update(host, key, ip):
         return False
 
     log.debug(response.text.strip())
-    log.info("update successful")
+    log.info("update to {ip} successful")
 
     return True
 
@@ -72,7 +72,7 @@ def ddns_update(host, key, ip):
 )
 def loop_ddns_update(host, key):
     last_ip = socket.getaddrinfo(host, None, socket.AF_INET6)[0][4][0]
-    log.debug(f"current registered address: {last_ip}")
+    log.info(f"currently registered address: {last_ip}")
 
     while True:
         current_ip = get_global_ipv6()
