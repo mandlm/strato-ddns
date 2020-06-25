@@ -8,6 +8,7 @@ from os import environ
 from netifaces import interfaces, ifaddresses, AF_INET6
 from ipaddress import ip_address
 from time import sleep
+import socket
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s - %(name)s %(levelname)-8s: %(message)s")
 log = logging.getLogger("ddns updater")
@@ -72,7 +73,9 @@ def ddns_update(host, key, ip):
     help="The ddns authorization key",
 )
 def loop_ddns_update(host, key):
-    last_ip = None
+    last_ip = socket.getaddrinfo(host, None, socket.AF_INET6)[0][4][0]
+    log.debug(f"current registered address: {last_ip}")
+
     while True:
         current_ip = get_global_ipv6()
         if current_ip != last_ip:
@@ -84,4 +87,5 @@ def loop_ddns_update(host, key):
 
 
 if __name__ == "__main__":
+    log.info("starting...")
     loop_ddns_update()
