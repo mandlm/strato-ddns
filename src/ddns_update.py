@@ -54,7 +54,7 @@ def ddns_update(host, key, ip):
         return False
 
     log.debug(response.text.strip())
-    log.info("update to {ip} successful")
+    log.info(f"update to {ip} successful")
 
     return True
 
@@ -71,7 +71,7 @@ def ddns_update(host, key, ip):
     help="The ddns authorization key",
 )
 def loop_ddns_update(host, key):
-    last_ip = socket.getaddrinfo(host, None, socket.AF_INET6)[0][4][0]
+    last_ip = ip_address(socket.getaddrinfo(host, None, socket.AF_INET6)[0][4][0])
     log.info(f"currently registered address: {last_ip}")
 
     while True:
