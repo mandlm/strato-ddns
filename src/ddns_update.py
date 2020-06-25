@@ -63,13 +63,11 @@ def ddns_update(host, key, ip):
 @click.option(
     "--host",
     required=True,
-    default=lambda: environ.get("DDNS_HOST", None),
     help="The dns name to update",
 )
 @click.option(
     "--key",
     required=True,
-    default=lambda: environ.get("DDNS_KEY", None),
     help="The ddns authorization key",
 )
 def loop_ddns_update(host, key):
@@ -88,4 +86,4 @@ def loop_ddns_update(host, key):
 
 if __name__ == "__main__":
     log.info("starting...")
-    loop_ddns_update()
+    loop_ddns_update(auto_envvar_prefix="DDNS")
